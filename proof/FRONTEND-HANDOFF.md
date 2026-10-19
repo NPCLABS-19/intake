@@ -14,6 +14,10 @@ The transparent navbar overlays the continuous hero grain gradient, with reserve
 
 The established homepage content and product destinations are preserved. Product destinations use the existing Figma frames, Approach uses the existing Notion brief, and science imagery, FAQ answers, About and Bag retain their wireframe status. The footer remains white on black with the fitted live-text INTAKE™ wordmark and rotating, pauseable monogram.
 
+## Approach glass depth and compositing
+
+The approach glass now blurs the source video/poster directly and uses a canvas showing the same decoded frame, masked to the exact monogram. It uses a single video decoder and has no `backdrop-filter` dependency. The video loops while visible; reduced motion uses the poster. The production build passed and the finish review returned **SHIP**. The latest depth pass adds 10 separated masked glass sheets with rims, front/back faces 44px apart, and perspective pointer tilt and translation. The canvas shifts its sampled image for refraction. Local verification confirmed pointer tilt state and matrix changes; the production build passes. Latest proof: [glass depth hover](glass-depth-hover.png). The [earlier fixed glass lens proof](glass-lens-fixed.png) records the prior compositing pass.
+
 ## Media
 
 Both replacement botanical videos were completed and integrated. Final exports retain all six seconds at 1440×1080 with the studio tint removed. The quoted total is 389.5/390 credits; billing has not been independently reconciled. See `../../product-scenes/replacement/DELIVERY.md` and `../../product-scenes/credit-ledger.json` for the media record.

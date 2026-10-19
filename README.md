@@ -17,7 +17,9 @@ The growth blends a native-generated macro moss carpet directly over the opaque 
 
 ## Approach glass
 
-The former media placeholder now uses the Magic Meal botanical video behind a frosted field and a clear, lightly refractive monogram-shaped window. All mask and bevel layers use the original vector path. One video decoder supplies the scene; it continues behind the blur and clears through the mark. Pointer tilt and scene parallax expose different portions. A paper-coloured edge feather blends all four sides into the page, including top and bottom. Enter/Space and touch toggle a small tilt; reduced motion keeps a static poster and removes spatial movement. Existing approach copy, labels and footer remain.
+The Magic Meal botanical video is blurred directly behind a clear monogram lens. One video decoder supplies both the background and the canvas frame masked to the exact original monogram; compositing has no `backdrop-filter` dependency. The scene loops while visible, and reduced motion uses the poster.
+
+The lens now has 10 separated masked glass sheets with rims and front/back faces 44px apart. Perspective pointer tilt and translation expose its depth; the canvas shifts its sampled image for refraction. Local checks verified pointer tilt state and matrix changes, and the production build passes. See [glass depth hover proof](proof/glass-depth-hover.png). This supersedes the earlier flatter compositing treatment; [the prior fixed lens proof](proof/glass-lens-fixed.png) remains as history.
 
 ## Current product scenes
 
