@@ -4,10 +4,30 @@ export function initGlassScene(){
   const video=stage.querySelector('video');
   const reduced=matchMedia('(prefers-reduced-motion: reduce)');
   const state={visible:false,pinned:false};
+  // Draw the same decoded frame into the clear lens; blur the source directly.
+  // This avoids masked backdrop-filter failures in composited 3D containers.
+  const lens=document.createElement('canvas');lens.className='glass-clear-lens';lens.setAttribute('aria-hidden','true');stage.querySelector('.glass-optic').prepend(lens);
+  const context=lens.getContext('2d'),poster=stage.querySelector('.glass-poster');
+  let lensFrame=0;
+  const drawLens=()=>{
+    const source=video.readyState>=2?video:poster;
+    const sw=source.videoWidth||source.naturalWidth,sh=source.videoHeight||source.naturalHeight;
+    if(!sw||!sh)return;
+    const rect=lens.getBoundingClientRect(),ratio=Math.min(devicePixelRatio,1.5);
+    const w=Math.round(rect.width*ratio),h=Math.round(rect.height*ratio);
+    if(lens.width!==w||lens.height!==h){lens.width=w;lens.height=h;}
+    const scale=Math.max(w/sw,h/sh);context.clearRect(0,0,w,h);context.drawImage(source,(w-sw*scale)/2,(h-sh*scale)/2,sw*scale,sh*scale);
+  };
+  const lensTick=()=>{lensFrame=0;drawLens();if(state.visible&&!document.hidden&&!video.paused)lensFrame=requestAnimationFrame(lensTick);};
+  const lensObserver=new ResizeObserver(drawLens);lensObserver.observe(stage);
+  video.addEventListener('loadeddata',drawLens);poster.addEventListener('load',drawLens);
+  video.addEventListener('play',()=>{if(!lensFrame)lensFrame=requestAnimationFrame(lensTick);});
+  drawLens();
   let frame=0,pointer=null;
   const playback=()=>{
     if(!state.visible||document.hidden||reduced.matches)video.pause();
     else video.play().catch(()=>{});
+    drawLens();if(state.visible&&!document.hidden&&!video.paused&&!lensFrame)lensFrame=requestAnimationFrame(lensTick);
   };
   const position=(x,y)=>{
     if(reduced.matches)return;
@@ -42,5 +62,5 @@ export function initGlassScene(){
   video.addEventListener('error',()=>{stage.dataset.video='fallback';});
   const observer=new IntersectionObserver(entries=>{state.visible=entries[0].isIntersecting;playback();},{threshold:.1});observer.observe(stage);
   reduced.addEventListener('change',()=>{reset();playback();});document.addEventListener('visibilitychange',playback);
-  addEventListener('pagehide',()=>{cancelAnimationFrame(frame);video.pause();observer.disconnect();},{once:true});
+  addEventListener('pagehide',()=>{cancelAnimationFrame(frame);cancelAnimationFrame(lensFrame);lensObserver.disconnect();video.pause();observer.disconnect();},{once:true});
 }

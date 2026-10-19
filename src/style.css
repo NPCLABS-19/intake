@@ -274,3 +274,11 @@ body{position:relative}
 .footer-tm{right:0;top:-.85em}
 @media(max-width:768px){.hero{padding-top:126px}.footer-tm{right:0}}
 .footer{overflow:clip}
+
+/* Blur the actual scene, then reveal its synchronized frame through the lens. */
+.glass-poster,.glass-botanical-video{filter:blur(17px) saturate(.78)}
+.glass-frost{display:none}
+.glass-clear-lens{position:absolute;inset:-8%;width:116%;height:116%;mask:url('/assets/monogram-window.svg') center/74% 82% no-repeat;-webkit-mask:url('/assets/monogram-window.svg') center/74% 82% no-repeat;z-index:0}
+.glass-window{z-index:1;backdrop-filter:none;-webkit-backdrop-filter:none}
+.glass-edge{z-index:2}
+@media(max-width:768px){.glass-poster,.glass-botanical-video{filter:blur(12px) saturate(.78)}}

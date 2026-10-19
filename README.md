@@ -76,3 +76,6 @@ Procedural speckles are removed. Native ImageGen produced the photographic concr
 Public repository: https://github.com/NPCLABS-19/intake
 Live site: https://npclabs-19.github.io/intake/
 Production build uses `PAGES_BASE=/intake/ npm run build`. GitHub Pages publishes the compiled `gh-pages` branch. The source branch is `main`; publishing uses a separate build branch because the authenticated token lacks workflow scope.
+
+### Glass rendering compatibility fix
+The approach scene blurs the source video directly and draws the same decoded frame into a monogram-masked canvas. This removes reliance on backdrop-filter sampling inside transformed/masked layers, which could leave the full scene sharp. One video decoder remains in use; reduced-motion/poster and offscreen playback behavior are preserved.
