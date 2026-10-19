@@ -1,0 +1,1 @@
+export{t as createMonogram}from"./monogram-B1iJuDwF.js";
