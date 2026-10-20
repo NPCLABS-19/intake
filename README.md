@@ -17,9 +17,9 @@ The growth blends a native-generated macro moss carpet directly over the opaque 
 
 ## Approach glass
 
-The Magic Meal botanical video is blurred directly behind a clear monogram lens. One video decoder supplies both the background and the canvas frame masked to the exact original monogram; compositing has no `backdrop-filter` dependency. The scene loops while visible, and reduced motion uses the poster.
+The Magic Meal botanical video stays fixed in stage space with a cover crop. One video decoder supplies the background and the canvas frame masked to the exact monogram; compositing has no `backdrop-filter` dependency. The scene loops while visible, and reduced motion uses the poster.
 
-The lens now has 10 separated masked glass sheets with rims and front/back faces 44px apart. Perspective pointer tilt and translation expose its depth; the canvas shifts its sampled image for refraction. Local checks verified pointer tilt state and matrix changes, and the production build passes. See [glass depth hover proof](proof/glass-depth-hover.png). This supersedes the earlier flatter compositing treatment; [the prior fixed lens proof](proof/glass-lens-fixed.png) remains as history.
+Only the exact monogram silhouette projection and layered depth edges tilt. The 10 separated masked sheets, rims and 44px front/back separation remain, with reduced tilt and delta-time exponential easing at 7/s. Scene parallax and refraction warping are removed; video pixels remain fixed. Blur is reduced 20%: desktop 17px → 13.6px and mobile 12px → 9.6px. The production build passes; DOM checks show no transform on the video/lens while the glass matrix changes. Latest proof: [fixed video glass](proof/fixed-video-glass-desktop.png). Earlier [depth hover](proof/glass-depth-hover.png) and [compositing](proof/glass-lens-fixed.png) proofs remain as history.
 
 ## Current product scenes
 
@@ -81,3 +81,7 @@ Production build uses `PAGES_BASE=/intake/ npm run build`. GitHub Pages publishe
 
 ### Glass rendering compatibility fix
 The approach scene blurs the source video directly and draws the same decoded frame into a monogram-masked canvas. This removes reliance on backdrop-filter sampling inside transformed/masked layers, which could leave the full scene sharp. One video decoder remains in use; reduced-motion/poster and offscreen playback behavior are preserved.
+
+### Latest October 20 finish — fixed video glass and hero paper
+
+The hero gradient is removed; the nutrient gradient remains. The glass lens now tilts only its exact silhouette projection and depth edges over fixed stage-space video pixels, with reduced tilt, 7/s delta-time exponential easing and 20% less blur. This supersedes earlier hero-gradient and glass parallax/refraction descriptions. The production build passes; [fixed video glass proof](proof/fixed-video-glass-desktop.png) records the latest finish.

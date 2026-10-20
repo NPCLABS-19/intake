@@ -6,17 +6,21 @@ The frontend finish review returned **SHIP**. The latest production build passed
 
 Quiet typography, uppercase micrographics and full-width rectangular black CTAs carry the approved direction. The nutrient section uses a noisy lime/green gradient that follows the cursor through smooth finite requestAnimationFrame updates; reduced motion keeps it fixed. `gradient-grain.svg` supplies grain. Warm semi-translucent matte paper labels with small dog-ears replace glass. They stay tucked into the section edge; both unfold or collapse together on click. `overflow: clip` prevents the internal hidden-scroll focus glitch. Mobile expansion uses the available width. Ingredient quantities and unapproved usage copy remain `[TBC]`.
 
-The hero keeps the exact opaque monogram shape at scale 1.25. Procedural speckles are removed. The reference-derived native ImageGen photographic tile at `public/assets/materials/cast-concrete-photo.png`, based on the user’s `images (30).jpeg`, provides grey cement and irregular air pockets. Triplanar color and photo-derived relief cover the form; mip filtering suppresses high-frequency grain. Small, irregular moss growth follows the cursor locally, using triplanar mapping. The hero-only grain green wash fades to paper before the formulas. The butterfly remains removed.
+The hero keeps the exact opaque monogram shape at scale 1.25. Procedural speckles are removed. The reference-derived native ImageGen photographic tile at `public/assets/materials/cast-concrete-photo.png`, based on the user’s `images (30).jpeg`, provides grey cement and irregular air pockets. Triplanar color and photo-derived relief cover the form; mip filtering suppresses high-frequency grain. Small, irregular moss growth follows the cursor locally, using triplanar mapping. The hero gradient is removed; the nutrient gradient remains. The butterfly remains removed.
 
 Broad negative space uses 100px desktop section padding and 88px beneath the expanded routine; mobile uses 64px section padding and 52px beneath the expanded routine.
 
-The transparent navbar overlays the continuous hero grain gradient, with reserved navigation space. The footer wordmark and ™ inset align to the divider endpoints through shared `--pad` and responsive `fitName`; footer `overflow: clip` prevents internal focus scrolling.
+The transparent navbar retains reserved navigation space over the hero; its earlier continuous hero gradient is removed. The footer wordmark and ™ inset align to the divider endpoints through shared `--pad` and responsive `fitName`; footer `overflow: clip` prevents internal focus scrolling.
 
 The established homepage content and product destinations are preserved. Product destinations use the existing Figma frames, Approach uses the existing Notion brief, and science imagery, FAQ answers, About and Bag retain their wireframe status. The footer remains white on black with the fitted live-text INTAKE™ wordmark and rotating, pauseable monogram.
 
 ## Approach glass depth and compositing
 
-The approach glass now blurs the source video/poster directly and uses a canvas showing the same decoded frame, masked to the exact monogram. It uses a single video decoder and has no `backdrop-filter` dependency. The video loops while visible; reduced motion uses the poster. The production build passed and the finish review returned **SHIP**. The latest depth pass adds 10 separated masked glass sheets with rims, front/back faces 44px apart, and perspective pointer tilt and translation. The canvas shifts its sampled image for refraction. Local verification confirmed pointer tilt state and matrix changes; the production build passes. Latest proof: [glass depth hover](glass-depth-hover.png). The [earlier fixed glass lens proof](glass-lens-fixed.png) records the prior compositing pass.
+The source video/poster is blurred directly, and a canvas displays the same decoded frame masked to the exact monogram. One video decoder supplies both; there is no `backdrop-filter` dependency. The scene loops while visible, and reduced motion uses the poster.
+
+Video pixels remain fixed in stage space with a cover crop. Only the exact monogram silhouette projection and depth edges tilt; the 10 separated masked glass sheets, rims and 44px front/back separation remain. Scene parallax and refraction warping are removed. Reduced tilt uses delta-time exponential easing at 7/s. Blur is reduced 20%: desktop 17px → 13.6px and mobile 12px → 9.6px.
+
+The production build passes. DOM checks confirmed no transform on the video/lens while the glass matrix changes. Latest proof: [fixed video glass](fixed-video-glass-desktop.png). The earlier [depth hover](glass-depth-hover.png) and [fixed compositing](glass-lens-fixed.png) proofs remain as history; their parallax/refraction treatment is superseded.
 
 ## Media
 

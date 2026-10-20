@@ -294,3 +294,10 @@ body{position:relative}
 .glass-edge-back{transform:translateZ(-24px);opacity:.48;filter:brightness(.7)}
 .glass-edge-mid{transform:translateZ(-8px);opacity:.3}
 @media(prefers-reduced-motion:reduce){.glass-optic{transform:none;transition:none}}
+/* Stationary video; only the projected glass silhouette moves. Blur reduced 20%. */
+.glass-poster,.glass-botanical-video{transform:none;transition:none;filter:blur(13.6px) saturate(.78)}
+.glass-clear-lens{inset:0;width:100%;height:100%;transform:none;mask:none;-webkit-mask:none;z-index:0;pointer-events:none}
+.glass-optic{z-index:1;transition:none}
+@media(max-width:768px){.glass-poster,.glass-botanical-video{filter:blur(9.6px) saturate(.78)}}
+/* The homepage hero returns to the soft-white page surface. */
+.hero::before,.hero::after{display:none}
