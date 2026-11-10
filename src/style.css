@@ -300,3 +300,101 @@ body{position:relative}
 @media(max-width:768px){.glass-poster,.glass-botanical-video{filter:blur(9.6px) saturate(.78)}}
 /* The homepage hero returns to the soft-white page surface. */
 .hero::before,.hero::after{display:none}
+
+/* A shared sheet of dot paper, including the coloured and inverse sections. */
+body,.routine::after,.footer{
+  --dot-grid:radial-gradient(circle,var(--grid-ink) .7px,transparent 1px);
+}
+body{
+  --grid-step:24px;
+  --grid-ink:rgba(47,52,37,.18);
+  background-image:var(--dot-grid);
+  background-size:var(--grid-step) var(--grid-step);
+}
+.routine::after{
+  --grid-ink:rgba(34,62,19,.38);
+  background-image:var(--dot-grid),url('/assets/gradient-grain.svg');
+  background-size:var(--grid-step) var(--grid-step),180px 180px;
+}
+.footer{
+  --grid-ink:rgba(255,255,255,.17);
+  background-image:var(--dot-grid);
+  background-size:var(--grid-step) var(--grid-step);
+}
+
+/* Placeholder specimens: replace the artwork inside each disc with the final icon. */
+.specimen-field{
+  width:min(100%,890px);
+  align-self:center;
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  align-items:center;
+  justify-items:center;
+  gap:clamp(8px,2vw,32px);
+  min-height:clamp(196px,22vw,302px);
+  margin:0;
+  padding:0;
+  list-style:none;
+}
+.specimen{
+  --diameter:74%;
+  --offset:0px;
+  --tone:#edeee6;
+  width:100%;
+  min-width:0;
+  display:grid;
+  justify-items:center;
+  gap:12px;
+  transform:translateY(var(--offset));
+}
+.specimen:nth-child(1){--diameter:66%;--offset:20px}
+.specimen:nth-child(2){--diameter:82%;--offset:-35px;--tone:#e5e9dc}
+.specimen:nth-child(3){--diameter:100%;--offset:13px;--tone:#e7ebe2}
+.specimen:nth-child(4){--diameter:71%;--offset:-23px}
+.specimen:nth-child(5){--diameter:63%;--offset:28px;--tone:#ebede5}
+.specimen-disc{
+  width:var(--diameter);
+  display:grid;
+  place-items:center;
+  aspect-ratio:1;
+  border:1px solid #d3d8cc;
+  border-radius:50%;
+  background:radial-gradient(circle at 29% 23%,#fafbf7 0%,var(--tone) 73%);
+  box-shadow:0 5px 12px rgba(42,52,31,.07);
+  color:#333e30;
+  transition:transform 460ms cubic-bezier(.16,1,.3,1),box-shadow 330ms ease,border-color 240ms ease;
+}
+.specimen-disc svg,.specimen-disc img{display:block;width:44%;height:auto}
+.specimen-disc svg{fill:none;stroke:currentColor;stroke-width:1.15;stroke-linecap:round;stroke-linejoin:round}
+.specimen-caption{
+  color:#3d4638;
+  font:400 .6875rem/1.35 "SFMono-Regular",Consolas,"Liberation Mono",monospace;
+  letter-spacing:.055em;
+  text-transform:uppercase;
+  white-space:nowrap;
+  transition:color 240ms ease;
+}
+@media(hover:hover) and (pointer:fine){
+  .specimen:hover .specimen-disc{
+    transform:translateY(-10px) scale(1.1);
+    border-color:#8f9d88;
+    box-shadow:0 15px 24px rgba(42,52,31,.15);
+  }
+  .specimen:hover .specimen-caption{color:#1a361d}
+}
+@media(max-width:768px){
+  body{--grid-step:20px}
+  .specimen-field{min-height:0;padding-block:21px 26px;gap:7px}
+  .specimen{gap:9px}
+  .specimen:nth-child(1){--offset:9px;--diameter:77%}
+  .specimen:nth-child(2){--offset:-12px;--diameter:88%}
+  .specimen:nth-child(3){--offset:7px}
+  .specimen:nth-child(4){--offset:-9px;--diameter:83%}
+  .specimen:nth-child(5){--offset:13px;--diameter:76%}
+  .specimen-caption{font-size:.625rem;letter-spacing:0;text-align:center}
+  .specimen-caption span{display:block}
+}
+@media(prefers-reduced-motion:reduce){
+  .specimen-disc,.specimen-caption{transition:none}
+  .specimen:hover .specimen-disc{transform:none}
+}
